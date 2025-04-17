@@ -1,13 +1,6 @@
 package com.liu.rpc.utils;
 
-import cn.hutool.core.io.resource.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
-
-import java.io.File;
-
-import java.io.IOException;
-import java.util.Objects;
 
 public class ConfigUtils {
 
@@ -44,9 +37,10 @@ public class ConfigUtils {
         org.springframework.core.io.Resource[] resources = null;
         try {
             resources = resolver.getResources(pattern);
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
+        if (resources == null || resources.length == 0) throw new RuntimeException("Resource not found!");
 
         return resources[0].getFilename();
     }
